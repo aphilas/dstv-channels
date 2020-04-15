@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <header>
-      <p>DSTV Channel List</p>
+      <img src="./assets/images/dstv-logo.png" alt="" width="90">
+      <p>Channels</p>
     </header>
 
     <article class="search">
-      <input type="text" name="" id="channel-input" placeholder="NatGeo" v-model="searchTerm">
-      <p class="caption">Search for channel</p>
+      <input type="text" name="" id="channel-input" placeholder="natgeo" v-model="searchTerm">
+      <p class="caption">Search channel</p>
     </article>
 
     <article class="list">
@@ -61,8 +62,6 @@ const withBouquet = channels.map((list, index) => list.map(channel => {
   return acc
 }, [])
 
-// console.log(withBouquet)
-
 export default {
   name: 'App',
 
@@ -70,6 +69,7 @@ export default {
     return {
       channels: withBouquet,
       searchTerm: '',
+      preparedTargets: undefined, // fuzzysort
     }
   },
 
@@ -79,6 +79,10 @@ export default {
       return fuzzy.go(this.searchTerm, this.channels, { key: 'channelName' }).map(result => result.obj)
       // return this.channels.filter(channel => channel.channelName.toLowerCase().includes(this.searchTerm.toLowerCase()))
     }
+  },
+
+  mounted(){
+    this.channels.forEach(channel => channel.filePrepared = fuzzy.prepare(channel.channelName))
   },
 
   components: {
@@ -107,15 +111,29 @@ body {
   flex-direction: column;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .75em;
+  box-shadow: 1px 1px 10px 0px rgba(100, 100, 100, 0.5);
+  margin-bottom: 1em;
+}
+
+header > img {
+  padding-right: 1em;
+}
+
 header > p {
   font-size: 1.5em;
   text-align: center;
   font-weight: bold;
   color: #0094d9;
+  margin: 0;
 }
 
 .search {
-  padding: 0.5em;
+  padding: 0 0.5em;
 }
 
 .search > input {
@@ -133,7 +151,7 @@ header > p {
 
 .caption {
   margin: 0;
-  padding: .25em 0;
+  padding: .25em 0 0 0;
   font-size: .8em;
   color: rgba(150, 150, 150, .8);
   font-style: italic;
@@ -141,7 +159,7 @@ header > p {
 }
 
 .list {
-  padding: 0.5em;
+  padding: 0 0.5em;
 }
 
 .list > ul {
