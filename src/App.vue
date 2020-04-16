@@ -93,7 +93,7 @@ export default {
       //   behavior: 'smooth',
       // })
       const header = document.getElementsByTagName('header')[0]
-      header.style.display = 'block'
+      header.style.display = 'flex'
     },
 
     hideHeader() {
