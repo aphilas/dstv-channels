@@ -93,12 +93,12 @@ export default {
       //   behavior: 'smooth',
       // })
       const header = document.getElementsByTagName('header')[0]
-      header.style.visibility = 'visible'
+      header.style.display = 'block'
     },
 
     hideHeader() {
       const header = document.getElementsByTagName('header')[0]
-      header.style.visibility = 'collapse'
+      header.style.visibility = 'none'
     }
   },
 
