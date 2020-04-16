@@ -10,8 +10,8 @@
         type="text" 
         name="" 
         id="channel-input" 
-        placeholder="natgeo" 
-        v-model="searchTerm"
+        placeholder="natgeo"
+        v-on:input="handleInput"
         v-on="mobile ? { focus: hideHeader, blur : showHeader } : null" 
       >
       <p class="caption">Search channel</p>
@@ -66,6 +66,15 @@ const withBouquet = channels.map((list, index) => list.map(channel => {
   return acc
 }, [])
 
+function _debounce(fn, delay) {
+  let timeout
+  return function (...args) {
+    const ctx = this
+    clearTimeout(timeout)
+    timeout = setTimeout(() => fn.apply(ctx, args), delay)
+  }
+}
+
 export default {
   name: 'App',
 
@@ -99,7 +108,12 @@ export default {
     hideHeader() {
       const header = document.getElementsByTagName('header')[0]
       header.style.display = 'none'
-    }
+    },
+
+    handleInput: _debounce(function({ target }) {
+      this.searchTerm = target.value
+    }, 250),
+
   },
 
   mounted(){
