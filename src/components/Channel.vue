@@ -3,7 +3,7 @@
     <div class="icon">
       <img 
         :src="channel.channelLogoPaths.SMALL" 
-        alt="DSTV icon"
+        :alt="channel.channelName + ' icon'"
         width="50"
       >
     </div>

@@ -6,7 +6,14 @@
     </header>
 
     <article class="search">
-      <input type="text" name="" id="channel-input" placeholder="natgeo" v-model="searchTerm">
+      <input 
+        type="text" 
+        name="" 
+        id="channel-input" 
+        placeholder="natgeo" 
+        v-model="searchTerm"
+        @focus="jumpToTop"
+      >
       <p class="caption">Search channel</p>
     </article>
 
@@ -25,15 +32,12 @@
 
 <script>
 import Channel from './components/Channel.vue'
-
-// channels
 import access from './assets/channels/access.json'
 import compactPlus from './assets/channels/compact_plus.json'
 import compact from './assets/channels/compact.json'
 import family from './assets/channels/family.json'
 import free from './assets/channels/free.json'
 import premium from './assets/channels/premium.json'
-
 import fuzzy from 'fuzzysort'
 
 const channelNames = new Map([
@@ -81,6 +85,14 @@ export default {
     }
   },
 
+  methods: {
+    jumpToTop({ target }) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+      })
+    }
+  },
+
   mounted(){
     this.channels.forEach(channel => channel.filePrepared = fuzzy.prepare(channel.channelName))
   },
@@ -106,7 +118,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-
   display: flex;
   flex-direction: column;
 }
@@ -115,9 +126,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .75em;
-  box-shadow: 1px 1px 10px 0px rgba(100, 100, 100, 0.5);
-  margin-bottom: 1em;
+  padding: 1em .75em .5em .75em;
+  /* margin-bottom: 1em; */
 }
 
 header > img {
@@ -132,10 +142,6 @@ header > p {
   margin: 0;
 }
 
-.search {
-  padding: 0 0.5em;
-}
-
 .search > input {
   line-height: 2em;
   font-size: 1em;
@@ -147,6 +153,15 @@ header > p {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   width: 100%;
+}
+
+.search {
+  background: white;
+  position: sticky;
+  top: 0;
+  /* border: 1px solid red; */
+  padding: .5em .5em .25em .5em;
+  box-shadow: 0px 10px 10px 0px rgba(150, 150, 150, 0.3); /* x, y, blur, spread */
 }
 
 .caption {
