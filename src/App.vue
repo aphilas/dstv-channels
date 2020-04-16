@@ -12,7 +12,7 @@
         id="channel-input" 
         placeholder="natgeo" 
         v-model="searchTerm"
-        @focus="jumpToTop"
+        v-on="mobile ? { focus: hideHeader, blur : showHeader } : null" 
       >
       <p class="caption">Search channel</p>
     </article>
@@ -74,6 +74,7 @@ export default {
       channels: withBouquet,
       searchTerm: '',
       preparedTargets: undefined, // fuzzysort
+      mobile: false,
     }
   },
 
@@ -86,16 +87,26 @@ export default {
   },
 
   methods: {
-    jumpToTop({ target }) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-      })
-      target.scrollTop += 10;
+    // TODO - smooth push to top
+    showHeader() {
+      // target.scrollIntoView({
+      //   behavior: 'smooth',
+      // })
+      const header = document.getElementsByTagName('header')[0]
+      header.style.visibility = 'visible'
+    },
+
+    hideHeader() {
+      const header = document.getElementsByTagName('header')[0]
+      header.style.visibility = 'collapse'
     }
   },
 
   mounted(){
     this.channels.forEach(channel => channel.filePrepared = fuzzy.prepare(channel.channelName))
+
+    const mediaQuery = window.matchMedia('(max-width: 600px)')
+    if (mediaQuery.matches) this.mobile = true
   },
 
   components: {
@@ -121,6 +132,10 @@ body {
   color: #2c3e50;
   display: flex;
   flex-direction: column;
+
+  max-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-y: hidden;
 }
 
 header {
@@ -143,6 +158,16 @@ header > p {
   margin: 0;
 }
 
+/* TODO - fix push search to top */
+.search {
+  background: white;
+  /* position: sticky; */
+  /* top: 0; */
+  /* border: 1px solid red; */
+  padding: 1em .5em .25em .5em;
+  box-shadow: 0px 10px 10px 0px rgba(150, 150, 150, 0.3); /* x, y, blur, spread */
+}
+
 .search > input {
   line-height: 2em;
   font-size: 1em;
@@ -156,15 +181,6 @@ header > p {
   width: 100%;
 }
 
-.search {
-  background: white;
-  position: sticky;
-  top: 0;
-  /* border: 1px solid red; */
-  padding: .5em .5em .25em .5em;
-  box-shadow: 0px 10px 10px 0px rgba(150, 150, 150, 0.3); /* x, y, blur, spread */
-}
-
 .caption {
   margin: 0;
   padding: .25em 0 0 0;
@@ -176,6 +192,7 @@ header > p {
 
 .list {
   padding: 0 0.5em;
+  overflow-y: scroll;
 }
 
 .list > ul {
