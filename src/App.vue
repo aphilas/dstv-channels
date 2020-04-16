@@ -90,6 +90,7 @@ export default {
       target.scrollIntoView({
         behavior: 'smooth',
       })
+      target.scrollTop += 10;
     }
   },
 
