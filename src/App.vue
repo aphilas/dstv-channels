@@ -98,7 +98,7 @@ export default {
 
     hideHeader() {
       const header = document.getElementsByTagName('header')[0]
-      header.style.visibility = 'none'
+      header.style.display = 'none'
     }
   },
 
