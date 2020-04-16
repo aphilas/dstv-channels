@@ -66,6 +66,10 @@ const withBouquet = channels.map((list, index) => list.map(channel => {
   return acc
 }, [])
 
+// const channelsCopy = JSON.parse(JSON.stringify(withBouquet))
+// const imageUrls = channelsCopy.map(channel => ({ url: channel.channelLogoPaths.SMALL }))
+// console.log(JSON.stringify(imageUrls))
+
 function _debounce(fn, delay) {
   let timeout
   return function (...args) {
