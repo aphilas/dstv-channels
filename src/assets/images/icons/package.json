@@ -1,0 +1,48 @@
+{
+  "name": "dstv-list",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "fuzzysort": "^1.1.4",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-pwa": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "vue": {
+    "pwa": {
+      "name": "DSTV Channels",
+      "themeColor": "#0094d9",
+      "appleMobileWebAppCapable": "no",
+      "appleMobileWebAppStatusBarStyle": "default",
+      "manifestOptions": {
+        "short_name": "DSTV Channels",
+        "background_color":"#ffffff",
+        "display": "standalone",
+        "icons": [
+          {"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},
+          {"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}
+        ]
+      },
+      "iconPaths": {
+        "favicon32": "img/icons/favicon-32x32.png",
+        "favicon16": "img/icons/favicon-16x16.png",
+        "appleTouchIcon": "img/icons/apple-touch-icon.png"
+      }
+    }
+  }
+}
