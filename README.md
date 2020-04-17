@@ -19,5 +19,6 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODO
+Precache icons
 Filter by bouquet
 Autocomplete
