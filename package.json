@@ -30,7 +30,7 @@
       "appleMobileWebAppCapable": "no",
       "appleMobileWebAppStatusBarStyle": "default",
       "manifestOptions": {
-        "short_name": "DSTV Channels",
+        "short_name": "Channels",
         "background_color":"#ffffff",
         "display": "standalone",
         "icons": [

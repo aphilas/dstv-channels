@@ -88,6 +88,7 @@ export default {
       searchTerm: '',
       preparedTargets: undefined, // fuzzysort
       mobile: false,
+      listEl: undefined,
     }
   },
 
@@ -116,15 +117,17 @@ export default {
 
     handleInput: _debounce(function({ target }) {
       this.searchTerm = target.value
+      this.listEl.scrollTop = 0
     }, 250),
-
   },
 
   mounted(){
     this.channels.forEach(channel => channel.filePrepared = fuzzy.prepare(channel.channelName))
+    this.listEl = document.querySelector('.list')
 
     const mediaQuery = window.matchMedia('(max-width: 600px)')
     if (mediaQuery.matches) this.mobile = true
+
   },
 
   components: {
@@ -216,5 +219,11 @@ header > p {
 .list > ul {
   list-style-type: none;
   padding-left: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .list {
+    -webkit-overflow-scrolling: touch; /* fix momentum in ios safari */
+  }
 }
 </style>

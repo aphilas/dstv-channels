@@ -1,4 +1,4 @@
-# dstv-list
+# [dstv-list](https://dstv-channels.netlify.app/)
 
 ## Project setup
 ```
@@ -19,6 +19,7 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODO
-Precache icons
-Filter by bouquet
-Autocomplete
+* Smooth scroll to top
+* Icons runtime caching
+* Filter by bouquet
+* Autocomplete
