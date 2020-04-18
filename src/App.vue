@@ -225,5 +225,9 @@ header > p {
   .list {
     -webkit-overflow-scrolling: touch; /* fix momentum in ios safari */
   }
+
+  header {
+    padding: 3em .75em 1.5em .75em;
+  }
 }
 </style>
