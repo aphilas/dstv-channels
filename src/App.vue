@@ -163,7 +163,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1em .75em .5em .75em;
+  padding: .5em .75em .25em .75em;
   /* margin-bottom: 1em; */
 }
 
